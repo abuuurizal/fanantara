@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fanantara - Koperasi Multi Pihak</title>
+    <meta
+      name="description"
+      content="Fanantara adalah Koperasi Multi Pihak yang bergerak dalam berbagai bidang usaha untuk kesejahteraan anggota dan masyarakat."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- Alpine.js -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: "#f0fdf4",
+                100: "#dcfce7",
+                200: "#bbf7d0",
+                300: "#86efac",
+                400: "#4ade80",
+                500: "#22c55e",
+                600: "#16a34a",
+                700: "#15803d",
+                800: "#166534",
+                900: "#14532d",
+                950: "#052e16",
+              },
+              secondary: {
+                50: "#faf5ff",
+                100: "#f3e8ff",
+                200: "#e9d5ff",
+                300: "#d8b4fe",
+                400: "#c084fc",
+                500: "#a855f7",
+                600: "#9333ea",
+                700: "#7c3aed",
+                800: "#6b21a8",
+                900: "#581c87",
+                950: "#3b0764",
+              },
+            },
+            fontFamily: {
+              sans: ["Plus Jakarta Sans", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      /* Hide x-cloak elements until Alpine.js is ready */
+      [x-cloak] {
+        display: none !important;
+      }
+
+      .gradient-primary {
+        background: linear-gradient(
+          135deg,
+          #22c55e 0%,
+          #16a34a 50%,
+          #15803d 100%
+        );
+      }
+      .gradient-secondary {
+        background: linear-gradient(135deg, #9333ea 0%, #7c3aed 100%);
+      }
+      .gradient-mixed {
+        background: linear-gradient(135deg, #22c55e 0%, #9333ea 100%);
+      }
+      .text-gradient {
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .text-gradient-mixed {
+        background: linear-gradient(135deg, #22c55e, #9333ea);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 20px 40px rgba(34, 197, 94, 0.15);
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .banner-bg {
+        background: linear-gradient(
+            135deg,
+            rgba(34, 197, 94, 0.85),
+            rgba(147, 51, 234, 0.75)
+          ),
+          url("assets/konfigurasi/hero-ecosystem.jpg") center/cover no-repeat;
+      }
+      /* Navbar Animations */
+      .nav-link {
+        position: relative;
+        padding: 0.5rem 0;
+      }
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #22c55e, #9333ea);
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+      }
+      .nav-link:hover::after {
+        width: 100%;
+      }
+      .nav-link:hover {
+        color: #22c55e;
+      }
+      .logo-animate {
+        transition: all 0.3s ease;
+      }
+      .logo-animate:hover {
+        transform: scale(1.05);
+      }
+      .logo-animate:hover img {
+        transform: rotate(5deg);
+      }
+      .logo-animate img {
+        transition: transform 0.3s ease;
+      }
+      .btn-primary {
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s ease;
+      }
+      .btn-primary::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.3),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+      .btn-primary:hover::before {
+        left: 100%;
+      }
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(34, 197, 94, 0.3);
+      }
+      .mobile-menu {
+        animation: slideDown 0.3s ease;
+      }
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .hamburger-icon {
+        transition: all 0.3s ease;
+      }
+      .hamburger-icon:hover {
+        color: #9333ea;
+        transform: scale(1.1);
+      }
+      /* Banner Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+      .animate-fade-in-up {
+        animation: fadeInUp 0.8s ease forwards;
+      }
+      .animate-fade-in-down {
+        animation: fadeInDown 0.8s ease forwards;
+      }
+      .animate-pulse-slow {
+        animation: pulse 3s ease-in-out infinite;
+      }
+      .animate-float {
+        animation: float 4s ease-in-out infinite;
+      }
+      .delay-100 {
+        animation-delay: 0.1s;
+      }
+      .delay-200 {
+        animation-delay: 0.2s;
+      }
+      .delay-300 {
+        animation-delay: 0.3s;
+      }
+      .delay-400 {
+        animation-delay: 0.4s;
+      }
+      .banner-content {
+        opacity: 0;
+      }
+      .banner-icon {
+        position: absolute;
+        opacity: 0.1;
+        font-size: 8rem;
+        color: white;
+      }
+      /* Feature Card */
+      .feature-card {
+        transition: all 0.3s ease;
+      }
+      .feature-card:hover {
+        transform: translateY(-5px);
+      }
+      .feature-card:hover .feature-icon {
+        transform: scale(1.1);
+      }
+      .feature-icon {
+        transition: all 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="font-sans bg-slate-50 text-gray-800">
+    <!-- Navbar -->
+    <nav
+      class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md shadow-sm transition-all duration-300"
+      id="navbar"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          <!-- Logo -->
+          <a href="#" class="flex items-center gap-3 logo-animate">
+            <div
+              class="w-12 h-12 rounded-full overflow-hidden transition-all duration-300"
+            >
+              <img
+                src="assets/konfigurasi/logo-fanantara.png"
+                alt="Fanantara"
+                class="w-full h-full object-contain"
+              />
+            </div>
+            <div>
+              <h1
+                class="text-xl font-bold text-primary-600 font-brand tracking-wide"
+              >
+                FANANTARA
+              </h1>
+              <p class="text-xs text-gray-500">Koperasi Multi Pihak</p>
+            </div>
+          </a>
+
+          <!-- Desktop Menu -->
+          <div class="hidden md:flex items-center gap-8">
+            <a href="#home" class="nav-link text-gray-700 font-medium">Home</a>
+            <a href="produk.html" class="nav-link text-gray-700 font-medium"
+              >Produk</a
+            >
+            <a href="artikel.html" class="nav-link text-gray-700 font-medium"
+              >Artikel</a
+            >
+            <a href="tentang.html" class="nav-link text-gray-700 font-medium"
+              >Tentang Kami</a
+            >
+            <a
+              href="daftar.html"
+              class="btn-primary gradient-primary text-white px-6 py-2.5 rounded-full font-semibold flex items-center gap-2"
+            >
+              <i class="bi bi-person-plus"></i> Daftar
+            </a>
+          </div>
+
+          <!-- Mobile Toggle -->
+          <button
+            class="md:hidden text-2xl text-primary-600 hamburger-icon"
+            onclick="toggleMobileMenu()"
+            id="menuBtn"
+          >
+            <i class="bi bi-list" id="menuIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div
+        class="hidden md:hidden bg-white border-t border-gray-100 shadow-lg"
+        id="mobileMenu"
+      >
+        <div class="flex flex-col p-4 gap-1 mobile-menu">
+          <a
+            href="#home"
+            class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-medium py-3 px-4 rounded-lg transition-all duration-200"
+            >Home</a
+          >
+          <a
+            href="produk.html"
+            class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-medium py-3 px-4 rounded-lg transition-all duration-200"
+            >Produk</a
+          >
+          <a
+            href="artikel.html"
+            class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-medium py-3 px-4 rounded-lg transition-all duration-200"
+            >Artikel</a
+          >
+          <a
+            href="tentang.html"
+            class="text-gray-700 hover:text-primary-600 hover:bg-primary-50 font-medium py-3 px-4 rounded-lg transition-all duration-200"
+            >Tentang Kami</a
+          >
+          <a
+            href="daftar.html"
+            class="gradient-primary text-white px-6 py-3 rounded-full font-semibold text-center mt-2 flex items-center justify-center gap-2"
+          >
+            <i class="bi bi-person-plus"></i> Daftar
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <script>
+      // Mobile Menu Toggle
+      function toggleMobileMenu() {
+        const menu = document.getElementById("mobileMenu");
+        const icon = document.getElementById("menuIcon");
+        menu.classList.toggle("hidden");
+        if (menu.classList.contains("hidden")) {
+          icon.className = "bi bi-list";
+        } else {
+          icon.className = "bi bi-x-lg";
+        }
+      }
+
+      // Navbar Scroll Effect
+      window.addEventListener("scroll", function () {
+        const navbar = document.getElementById("navbar");
+        if (window.scrollY > 50) {
+          navbar.classList.add("shadow-lg", "bg-white");
+          navbar.classList.remove("bg-white/95");
+        } else {
+          navbar.classList.remove("shadow-lg", "bg-white");
+          navbar.classList.add("bg-white/95");
+        }
+      });
+    </script>
+
+    <!-- Hero Banner -->
+    <section id="home" class="banner-bg min-h-screen flex items-center pt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div class="text-center text-white">
+          <!-- Title -->
+          <h1
+            class="text-4xl md:text-6xl font-bold mb-6 banner-content animate-fade-in-up delay-100"
+          >
+            Layanan Koperasi
+            <span class="block text-yellow-300">Dalam Genggaman Anda</span>
+          </h1>
+
+          <!-- Description -->
+          <p
+            class="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-8 banner-content animate-fade-in-up delay-200"
+          >
+            Download aplikasi <strong>Fanantara</strong> sekarang! Nikmati
+            kemudahan mengelola keuangan, mengajukan pinjaman, dan memantau
+            semua transaksi langsung dari smartphone Anda.
+          </p>
+
+          <!-- CTA Button -->
+          <div
+            class="flex flex-col sm:flex-row gap-4 mb-7 justify-center items-center banner-content animate-fade-in-up delay-300"
+          >
+            <a
+              href="https://play.google.com/store"
+              target="_blank"
+              class="group bg-black hover:bg-gray-900 text-white px-8 py-4 rounded-2xl font-semibold text-lg flex items-center gap-4 shadow-2xl hover:shadow-black/30 hover:scale-105 transition-all duration-300"
+            >
+              <div
+                class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center group-hover:bg-white/20 transition-colors"
+              >
+                <i class="bi bi-google-play text-2xl"></i>
+              </div>
+              <div class="text-left">
+                <div class="text-xs opacity-70 uppercase tracking-wider">
+                  Gratis Download
+                </div>
+                <div class="font-bold text-xl">Google Play</div>
+              </div>
+              <i
+                class="bi bi-arrow-right text-xl opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+              ></i>
+            </a>
+          </div>
+
+          <!-- Feature Highlights -->
+          <div
+            class="flex flex-wrap justify-center gap-4 banner-content animate-fade-in-up delay-200"
+          >
+            <div
+              class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
+            >
+              <i class="bi bi-lightning-charge text-yellow-400"></i>
+              <span class="text-sm">Transaksi Cepat</span>
+            </div>
+            <div
+              class="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full"
+            >
+              <i class="bi bi-clock-history text-blue-400"></i>
+              <span class="text-sm">Akses 24/7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative Icons -->
+      <i class="bi bi-phone banner-icon top-32 left-10 animate-float"></i>
+      <i
+        class="bi bi-wallet2 banner-icon bottom-20 right-10 animate-float delay-200"
+      ></i>
+    </section>
+
+    <!-- Keuntungan Section -->
+    <section id="keuntungan" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-12">
+          <span
+            class="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4"
+          >
+            Keuntungan
+          </span>
+          <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-3">
+            Kenapa Harus Daftar <span class="text-gradient">Fanantara</span>?
+          </h2>
+          <p class="text-gray-600 max-w-xl mx-auto text-sm">
+            Nikmati berbagai keuntungan menjadi anggota koperasi kami
+          </p>
+        </div>
+
+        <!-- Benefits List - Mobile First -->
+        <div class="space-y-4 max-w-2xl mx-auto">
+          <!-- Benefit 1 -->
+          <div
+            class="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-gray-100"
+          >
+            <div
+              class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="bi bi-piggy-bank text-primary-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800 mb-1">SHU Tahunan</h3>
+              <p class="text-gray-600 text-sm">
+                Dapatkan bagi hasil keuntungan sesuai kontribusi Anda setiap
+                tahun
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit 2 -->
+          <div
+            class="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-gray-100"
+          >
+            <div
+              class="w-12 h-12 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="bi bi-percent text-secondary-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800 mb-1">
+                Harga Khusus Anggota
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Potongan harga spesial untuk semua produk dan layanan koperasi
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit 3 -->
+          <div
+            class="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-gray-100"
+          >
+            <div
+              class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="bi bi-cash-stack text-primary-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800 mb-1">Pinjaman Mudah</h3>
+              <p class="text-gray-600 text-sm">
+                Akses pinjaman dengan bunga rendah dan proses cepat tanpa ribet
+              </p>
+            </div>
+          </div>
+
+          <!-- Benefit 4 -->
+          <div
+            class="flex items-start gap-4 bg-white p-5 rounded-xl shadow-sm border border-gray-100"
+          >
+            <div
+              class="w-12 h-12 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0"
+            >
+              <i class="bi bi-people text-secondary-600 text-xl"></i>
+            </div>
+            <div>
+              <h3 class="font-semibold text-gray-800 mb-1">
+                Jaringan & Komunitas
+              </h3>
+              <p class="text-gray-600 text-sm">
+                Bergabung dengan komunitas anggota untuk networking dan peluang
+                bisnis
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tentang Section -->
+    <section id="tentang" class="py-16 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <!-- Image -->
+          <div class="flex justify-center">
+            <img
+              src="assets/konfigurasi/logo3d.png"
+              alt="Fanantara Logo 3D"
+              class="w-64 md:w-80 object-contain"
+            />
+          </div>
+
+          <!-- Content -->
+          <div>
+            <span
+              class="inline-block px-4 py-2 bg-secondary-100 text-secondary-700 rounded-full text-sm font-semibold mb-4"
+            >
+              Tentang Kami
+            </span>
+            <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">
+              Mengenal <span class="text-gradient-mixed">Fanantara</span>
+            </h2>
+            <p class="text-gray-600 mb-4 leading-relaxed text-sm">
+              <strong>Fanantara</strong> adalah Koperasi Multi Pihak yang
+              menghubungkan berbagai elemen masyarakat dalam satu ekosistem
+              ekonomi yang saling menguntungkan. Kami hadir untuk menjembatani
+              kebutuhan anggota dengan solusi keuangan yang mudah, aman, dan
+              terpercaya.
+            </p>
+            <p class="text-gray-600 mb-6 leading-relaxed text-sm">
+              Melalui aplikasi mobile dan layanan digital, setiap anggota dapat
+              mengakses simpanan, pinjaman, serta berbagai produk koperasi kapan
+              saja dan di mana saja. Fanantara berkomitmen untuk mendorong
+              pertumbuhan ekonomi inklusif bagi seluruh anggota dan masyarakat
+              Indonesia.
+            </p>
+
+            <!-- Values -->
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center"
+                >
+                  <i class="bi bi-check-lg text-primary-600 text-sm"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700"
+                  >Transparan</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center"
+                >
+                  <i class="bi bi-check-lg text-primary-600 text-sm"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700"
+                  >Profesional</span
+                >
+              </div>
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center"
+                >
+                  <i class="bi bi-check-lg text-primary-600 text-sm"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Amanah</span>
+              </div>
+              <div class="flex items-center gap-2">
+                <div
+                  class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center"
+                >
+                  <i class="bi bi-check-lg text-primary-600 text-sm"></i>
+                </div>
+                <span class="text-sm font-medium text-gray-700">Inklusif</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Produk Section -->
+    <section id="produk" class="py-16 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="flex items-center justify-between mb-8">
+          <div>
+            <h2 class="text-xl md:text-2xl font-bold text-gray-800">
+              Produk <span class="text-gradient">Terbaru</span>
+            </h2>
+            <p class="text-gray-500 text-sm mt-1">
+              Temukan produk dari mitra koperasi
+            </p>
+          </div>
+          <a
+            href="produk.html"
+            class="text-primary-600 hover:text-primary-700 text-sm font-medium flex items-center gap-1"
+          >
+            Lihat Semua <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <!-- Products Grid - Mobile First -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <!-- Product 1 -->
+          <a
+            href="#"
+            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="aspect-square bg-gray-100">
+              <img
+                src="assets/produk/beras1.webp"
+                alt="Beras Premium"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-semibold text-gray-800 text-sm line-clamp-2 mb-1">
+                Beras Premium 5kg
+              </h3>
+              <p class="text-primary-600 font-bold text-sm mb-2">Rp 75.000</p>
+              <div class="flex items-center gap-1 text-xs text-gray-500">
+                <i class="bi bi-shop"></i>
+                <span class="truncate">Toko Sembako Maju</span>
+              </div>
+              <div class="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                <i class="bi bi-geo-alt"></i>
+                <span class="truncate">Jakarta Selatan</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Product 2 -->
+          <a
+            href="#"
+            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="aspect-square bg-gray-100">
+              <img
+                src="assets/produk/minyak-sunco-1.webp"
+                alt="Madu Murni"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-semibold text-gray-800 text-sm line-clamp-2 mb-1">
+                Madu Murni 500ml
+              </h3>
+              <p class="text-primary-600 font-bold text-sm mb-2">Rp 120.000</p>
+              <div class="flex items-center gap-1 text-xs text-gray-500">
+                <i class="bi bi-shop"></i>
+                <span class="truncate">Madu Nusantara</span>
+              </div>
+              <div class="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                <i class="bi bi-geo-alt"></i>
+                <span class="truncate">Bandung</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Product 3 -->
+          <a
+            href="#"
+            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="aspect-square bg-gray-100">
+              <img
+                src="assets/produk/minyak-sunco-1.webp"
+                alt="Kopi Arabika"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-semibold text-gray-800 text-sm line-clamp-2 mb-1">
+                Kopi Arabika 250g
+              </h3>
+              <p class="text-primary-600 font-bold text-sm mb-2">Rp 85.000</p>
+              <div class="flex items-center gap-1 text-xs text-gray-500">
+                <i class="bi bi-shop"></i>
+                <span class="truncate">Kopi Nusantara</span>
+              </div>
+              <div class="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                <i class="bi bi-geo-alt"></i>
+                <span class="truncate">Surabaya</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Product 4 -->
+          <a
+            href="#"
+            class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+          >
+            <div class="aspect-square bg-gray-100">
+              <img
+                src="assets/produk/beras1.webp"
+                alt="Gula Aren"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-semibold text-gray-800 text-sm line-clamp-2 mb-1">
+                Gula Aren 1kg
+              </h3>
+              <p class="text-primary-600 font-bold text-sm mb-2">Rp 55.000</p>
+              <div class="flex items-center gap-1 text-xs text-gray-500">
+                <i class="bi bi-shop"></i>
+                <span class="truncate">Tani Sejahtera</span>
+              </div>
+              <div class="flex items-center gap-1 text-xs text-gray-400 mt-1">
+                <i class="bi bi-geo-alt"></i>
+                <span class="truncate">Yogyakarta</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 gradient-mixed relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="text-center text-white">
+          <h2 class="text-2xl md:text-3xl font-bold mb-4">
+            Bergabung Sekarang, Gratis!
+          </h2>
+          <p class="text-sm md:text-base text-white/90 max-w-xl mx-auto mb-6">
+            Daftar menjadi anggota Fanantara dan nikmati berbagai keuntungan
+            eksklusif untuk kesejahteraan Anda.
+          </p>
+          <a
+            href="daftar.html"
+            class="inline-flex items-center gap-2 bg-white text-primary-600 px-8 py-3 rounded-full font-semibold shadow-lg hover:shadow-xl hover:scale-105 hover:-translate-y-1 transition-all duration-300"
+          >
+            <i class="bi bi-person-plus-fill text-xl"></i> Daftar Sekarang
+          </a>
+        </div>
+      </div>
+
+      <!-- Decorative Elements -->
+      <div
+        class="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full -translate-x-1/2 -translate-y-1/2"
+      ></div>
+      <div
+        class="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full translate-x-1/2 translate-y-1/2"
+      ></div>
+    </section>
+
+    <!-- Artikel Section -->
+    <section id="artikel" class="py-20 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+          <span
+            class="inline-block px-4 py-2 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4"
+          >
+            Artikel Terbaru
+          </span>
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+            Berita & <span class="text-gradient">Informasi</span>
+          </h2>
+          <p class="text-gray-600 max-w-2xl mx-auto">
+            Ikuti perkembangan terbaru seputar kegiatan dan program Koperasi
+            Fanantara.
+          </p>
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Article 1 -->
+          <article
+            class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
+          >
+            <div class="h-48 bg-gradient-to-br from-primary-400 to-primary-600">
+              <img
+                src="assets/artikel/artikel-1.jpg"
+                alt="Artikel"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                <i class="bi bi-calendar3"></i>
+                <span>20 Des 2025</span>
+              </div>
+              <h3 class="font-bold text-lg text-gray-800 mb-2">
+                Rapat Anggota Tahunan Fanantara 2025
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                RAT tahun ini membahas capaian koperasi dan rencana pengembangan
+                unit usaha baru...
+              </p>
+              <a
+                href="#"
+                class="text-primary-600 font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Baca Selengkapnya <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article
+            class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
+          >
+            <div
+              class="h-48 bg-gradient-to-br from-secondary-400 to-secondary-600"
+            >
+              <img
+                src="assets/artikel/artikel-2.jpg"
+                alt="Artikel"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                <i class="bi bi-calendar3"></i>
+                <span>15 Des 2025</span>
+              </div>
+              <h3 class="font-bold text-lg text-gray-800 mb-2">
+                Pelatihan Kewirausahaan untuk Anggota
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Fanantara mengadakan workshop kewirausahaan untuk meningkatkan
+                kapasitas anggota...
+              </p>
+              <a
+                href="#"
+                class="text-primary-600 font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Baca Selengkapnya <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article
+            class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover"
+          >
+            <div class="h-48 bg-gradient-to-br from-primary-400 to-primary-600">
+              <img
+                src="assets/artikel/artikel-3.jpg"
+                alt="Artikel"
+                class="w-full h-full object-cover"
+              />
+            </div>
+            <div class="p-6">
+              <div class="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                <i class="bi bi-calendar3"></i>
+                <span>10 Des 2025</span>
+              </div>
+              <h3 class="font-bold text-lg text-gray-800 mb-2">
+                Pembagian SHU Tahun 2024
+              </h3>
+              <p class="text-gray-600 text-sm mb-4">
+                Koperasi Fanantara membagikan Sisa Hasil Usaha kepada seluruh
+                anggota aktif...
+              </p>
+              <a
+                href="#"
+                class="text-primary-600 font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all"
+              >
+                Baca Selengkapnya <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <!-- View All Button -->
+        <div class="text-center mt-12">
+          <a
+            href="#"
+            class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 px-8 py-3 rounded-full font-semibold hover:bg-primary-600 hover:text-white transition-all duration-300"
+          >
+            Lihat Semua Artikel <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 pt-12 pb-6">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-2 lg:grid-cols-12 gap-6 lg:gap-8 mb-10">
+          <!-- Brand -->
+          <div class="col-span-2 lg:col-span-4">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-12 h-12 rounded-full overflow-hidden">
+                <img
+                  src="assets/konfigurasi/logo-fanantara.png"
+                  alt="Fanantara"
+                  class="w-full h-full object-contain"
+                />
+              </div>
+              <div>
+                <h3 class="text-lg font-bold text-gray-800">FANANTARA</h3>
+                <p class="text-xs text-gray-500">Koperasi Multi Pihak</p>
+              </div>
+            </div>
+            <p class="text-gray-600 text-sm mb-4">
+              Koperasi Multi Pihak yang bergerak dalam berbagai bidang usaha
+              untuk kesejahteraan anggota dan masyarakat.
+            </p>
+            <!-- Social Media -->
+            <div class="flex gap-3">
+              <a
+                href="#"
+                class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center text-black hover:bg-black hover:text-white transition"
+                ><i class="bi bi-tiktok"></i
+              ></a>
+              <a
+                href="#"
+                class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center text-pink-600 hover:bg-gradient-to-br hover:from-purple-500 hover:to-pink-500 hover:text-white transition"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a
+                href="#"
+                class="w-9 h-9 bg-gray-100 rounded-full flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition"
+                ><i class="bi bi-youtube"></i
+              ></a>
+            </div>
+          </div>
+
+          <!-- NAVIGASI -->
+          <div class="col-span-1 lg:col-span-3">
+            <h4 class="text-gray-800 font-semibold text-sm mb-3">NAVIGASI</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="#home"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Home</a
+                >
+              </li>
+              <li>
+                <a
+                  href="produk.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Produk</a
+                >
+              </li>
+              <li>
+                <a
+                  href="artikel.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Artikel</a
+                >
+              </li>
+              <li>
+                <a
+                  href="tentang.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Tentang Kami</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- LINK -->
+          <div class="col-span-1 lg:col-span-2">
+            <h4 class="text-gray-800 font-semibold text-sm mb-3">LINK</h4>
+            <ul class="space-y-2">
+              <li>
+                <a
+                  href="masuk.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Masuk</a
+                >
+              </li>
+              <li>
+                <a
+                  href="daftar.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Daftar</a
+                >
+              </li>
+              <li>
+                <a
+                  href="adart.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >AD/ART</a
+                >
+              </li>
+              <li>
+                <a
+                  href="kontak.html"
+                  class="text-gray-600 hover:text-primary-600 text-sm transition"
+                  >Kontak Kami</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- Logos -->
+          <div
+            class="col-span-2 lg:col-span-3 flex flex-col items-center mt-4 lg:mt-0"
+          >
+            <div class="flex flex-wrap items-center justify-center gap-4 mb-3">
+              <img
+                src="assets/konfigurasi/komdigi-registered.webp"
+                alt="Komdigi Registered"
+                class="h-20 object-contain"
+              />
+              <img
+                src="assets/konfigurasi/qrcode-pse.png"
+                alt="QR Code PSE"
+                class="h-20 object-contain"
+              />
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-4">
+              <img
+                src="assets/konfigurasi/logo-pse-small.png"
+                alt="Logo PSE"
+                class="h-7 object-contain"
+              />
+              <img
+                src="assets/konfigurasi/logo-zona-integritas.png"
+                alt="Logo Zona Integritas"
+                class="h-7 object-contain"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div
+          class="border-t border-gray-200 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4"
+        >
+          <p class="text-gray-600 text-sm">
+            &copy; 2025 Fanantara. All rights reserved.
+          </p>
+          <div class="flex gap-4 text-sm">
+            <a href="#" class="text-gray-600 hover:text-primary-600 transition"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-600 hover:text-primary-600 transition"
+              >Terms & Conditions</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
