@@ -274,6 +274,8 @@
         opacity: 0.1;
         font-size: 8rem;
         color: white;
+        z-index: 0;
+        pointer-events: none;
       }
       /* Feature Card */
       .feature-card {
@@ -287,6 +289,79 @@
       }
       .feature-icon {
         transition: all 0.3s ease;
+      }
+      /* Scroll Animation */
+      .scroll-animate {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+      .scroll-animate.animate-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .scroll-animate.animate-left {
+        transform: translateX(-40px);
+      }
+      .scroll-animate.animate-left.animate-visible {
+        transform: translateX(0);
+      }
+      .scroll-animate.animate-right {
+        transform: translateX(40px);
+      }
+      .scroll-animate.animate-right.animate-visible {
+        transform: translateX(0);
+      }
+      .scroll-animate.animate-scale {
+        transform: scale(0.9);
+      }
+      .scroll-animate.animate-scale.animate-visible {
+        transform: scale(1);
+      }
+      /* Scroll Up Button */
+      .scroll-up-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background: linear-gradient(
+          135deg,
+          rgba(34, 197, 94, 0.85),
+          rgba(147, 51, 234, 0.85)
+        );
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease,
+          background 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        backdrop-filter: blur(5px);
+      }
+      .scroll-up-btn:hover {
+        background: linear-gradient(
+          135deg,
+          rgba(34, 197, 94, 1),
+          rgba(147, 51, 234, 1)
+        );
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
+      }
+      .scroll-up-btn.visible {
+        opacity: 0.7;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .scroll-up-btn.visible:hover {
+        opacity: 1;
       }
     </style>
   </head>
@@ -413,8 +488,11 @@
     </script>
 
     <!-- Hero Banner -->
-    <section id="home" class="banner-bg min-h-screen flex items-center pt-20">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <section
+      id="home"
+      class="banner-bg min-h-screen flex items-center pt-20 relative"
+    >
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
         <div class="text-center text-white">
           <!-- Title -->
           <h1
@@ -487,7 +565,7 @@
     </section>
 
     <!-- Keuntungan Section -->
-    <section id="keuntungan" class="py-16 bg-gray-50">
+    <section id="keuntungan" class="py-16 bg-gray-50 scroll-animate">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-12">
@@ -584,7 +662,7 @@
     </section>
 
     <!-- Tentang Section -->
-    <section id="tentang" class="py-16 bg-white">
+    <section id="tentang" class="py-16 bg-white scroll-animate">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <!-- Image -->
@@ -666,7 +744,7 @@
     </section>
 
     <!-- Produk Section -->
-    <section id="produk" class="py-16 bg-gray-50">
+    <section id="produk" class="py-16 bg-gray-50 scroll-animate">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="flex items-center justify-between mb-8">
@@ -804,7 +882,9 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="py-16 gradient-mixed relative overflow-hidden">
+    <section
+      class="py-16 gradient-mixed relative overflow-hidden scroll-animate animate-scale"
+    >
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div class="text-center text-white">
           <h2 class="text-2xl md:text-3xl font-bold mb-4">
@@ -833,7 +913,7 @@
     </section>
 
     <!-- Artikel Section -->
-    <section id="artikel" class="py-20 bg-gray-50">
+    <section id="artikel" class="py-20 bg-gray-50 scroll-animate">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <!-- Section Header -->
         <div class="text-center mb-16">
@@ -1127,5 +1207,69 @@
         </div>
       </div>
     </footer>
+
+    <!-- Scroll Up Button -->
+    <button
+      id="scrollUpBtn"
+      class="scroll-up-btn"
+      onclick="scrollToTop()"
+      aria-label="Scroll ke atas"
+    >
+      <i class="bi bi-arrow-up"></i>
+    </button>
+
+    <script>
+      // Scroll Animation with Intersection Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("animate-visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all scroll-animate elements
+      document.querySelectorAll(".scroll-animate").forEach((el) => {
+        scrollObserver.observe(el);
+      });
+
+      // Scroll Up Button Logic
+      const scrollUpBtn = document.getElementById("scrollUpBtn");
+      let scrollTimeout;
+      let isScrolling = false;
+
+      function showScrollBtn() {
+        if (window.scrollY > 300) {
+          scrollUpBtn.classList.add("visible");
+          isScrolling = true;
+
+          // Clear existing timeout
+          clearTimeout(scrollTimeout);
+
+          // Hide after 2 seconds of no scrolling
+          scrollTimeout = setTimeout(() => {
+            scrollUpBtn.classList.remove("visible");
+            isScrolling = false;
+          }, 2000);
+        } else {
+          scrollUpBtn.classList.remove("visible");
+        }
+      }
+
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      }
+
+      window.addEventListener("scroll", showScrollBtn);
+    </script>
   </body>
 </html>
